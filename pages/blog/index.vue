@@ -63,10 +63,18 @@
 </template>
 
 <script setup lang="ts">
+import { SEO_DEFAULTS } from '~/utils/seo/constants'
+
 useSEO({
-  title: 'Blog | Rently',
-  description: 'Read the latest insights, tips, and news about renting, real estate, and personal finance from Rently.',
+  title: 'Renting Tips, Market Insights & Guides',
+  description: 'Read the latest insights, tips, and news about renting, real estate, and personal finance in the UAE from Rently.',
+  keywords: ['UAE rental', 'Dubai rent', 'renting tips', 'real estate UAE', 'property rental'],
 })
+
+useBreadcrumbSchema([
+  { name: 'Home', url: SEO_DEFAULTS.siteUrl },
+  { name: 'Blog', url: `${SEO_DEFAULTS.siteUrl}/blog` },
+])
 
 const searchQuery = ref('')
 

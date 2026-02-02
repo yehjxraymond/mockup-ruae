@@ -119,6 +119,8 @@
 </template>
 
 <script setup lang="ts">
+import { SEO_DEFAULTS } from '~/utils/seo/constants'
+
 const route = useRoute()
 const slug = route.params.slug as string
 
@@ -129,6 +131,7 @@ const article = ref({
   excerpt: 'Learn how flexible payment options can help you move into your dream home without breaking the bank.',
   category: 'Tips & Advice',
   date: '2 Feb 2026',
+  dateISO: '2026-02-02',
   content: `
     Moving into a new home is exciting, but the financial burden of large upfront deposits can be overwhelming.
     In this comprehensive guide, we'll explore how modern rental payment solutions are changing the game for
@@ -157,10 +160,29 @@ const relatedArticles = [
   },
 ]
 
+const articleUrl = `${SEO_DEFAULTS.siteUrl}/blog/${slug}`
+
 useSEO({
-  title: `${article.value.title} | Rently Blog`,
+  title: article.value.title,
   description: article.value.excerpt,
+  type: 'article',
+  publishedTime: article.value.dateISO,
+  section: article.value.category,
 })
+
+useArticleSchema({
+  title: article.value.title,
+  description: article.value.excerpt,
+  url: articleUrl,
+  datePublished: article.value.dateISO,
+  section: article.value.category,
+})
+
+useBreadcrumbSchema([
+  { name: 'Home', url: SEO_DEFAULTS.siteUrl },
+  { name: 'Blog', url: `${SEO_DEFAULTS.siteUrl}/blog` },
+  { name: article.value.title, url: articleUrl },
+])
 </script>
 
 <style scoped>

@@ -53,30 +53,11 @@
 </template>
 
 <script setup lang="ts">
+import { FAQ_DATA } from '~/utils/seo/constants'
+
 const openFaq = ref<number | null>(null)
 
-const faqs = [
-  {
-    question: 'Who is eligible to use Rently?',
-    answer: 'Rently is available to residents and expats in the UAE with a valid Emirates ID, steady income, and good credit history. We accept salaried employees, self-employed individuals, and business owners who meet our verification criteria.'
-  },
-  {
-    question: 'What if I need to terminate my rental agreement early?',
-    answer: 'If you need to terminate your rental agreement early, please contact our support team. We work with you and your landlord to find the best solution. Early termination terms depend on your rental contract and may be subject to fees as outlined in your agreement.'
-  },
-  {
-    question: 'Can I use Rently without paying a deposit?',
-    answer: 'Yes! That\'s exactly what Rently does. We cover your security deposit upfront to the landlord, and you pay us back in manageable monthly installments over the course of your rental period. This means you don\'t need to have a large sum available upfront.'
-  },
-  {
-    question: 'Does Rently charge any fees?',
-    answer: 'Rently charges a transparent service fee for facilitating your rental payment and covering your deposit. All fees are clearly disclosed upfront during the application process, with no hidden charges. The exact fee depends on your rental amount and payment plan.'
-  },
-  {
-    question: 'What types of properties can I rent with Rently?',
-    answer: 'Rently works with a wide range of properties including apartments, villas, townhouses, and studios across the UAE. We partner with major property developers and landlords in Dubai, Abu Dhabi, and other emirates. If your desired property isn\'t already in our network, we can work with your landlord to onboard them.'
-  }
-]
+const faqs = FAQ_DATA
 
 const toggleFaq = (index: number) => {
   openFaq.value = openFaq.value === index ? null : index

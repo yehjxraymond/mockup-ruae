@@ -12,9 +12,15 @@
 </template>
 
 <script setup lang="ts">
+import { FAQ_DATA } from '~/utils/seo/constants'
+
 useSEO({
-  title: 'Rently | The better way to rent.',
-  description: 'Rent now, pay later. Split your rent into manageable monthly payments with Rently. No large upfront deposits required.',
+  title: 'Split Annual Rent into Monthly Payments',
+  description: 'Rent now, pay later. Split your annual rent into manageable monthly payments with Rently. No large upfront deposits required. Available across UAE.',
   type: 'website',
 })
+
+useOrganizationSchema()
+useWebSiteSchema()
+useFAQSchema(FAQ_DATA)
 </script>
