@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    sources: ['/api/__sitemap__/blog-urls'],
+    sources: ['/api/__sitemap__/blog-urls', '/api/__sitemap__/uses-urls'],
     defaults: {
       changefreq: 'weekly',
       priority: 0.8,

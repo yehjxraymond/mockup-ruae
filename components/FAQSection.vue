@@ -2,15 +2,15 @@
   <section class="py-20 bg-rently-purple">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-4">
-        Frequently asked questions
+        {{ props.title }}
       </h2>
       <p class="text-xl text-white/80 text-center mb-12">
-        Everything you need to know about Rently
+        {{ props.subtitle }}
       </p>
 
       <div class="space-y-4">
         <div
-          v-for="(faq, index) in faqs"
+          v-for="(faq, index) in props.faqs"
           :key="index"
           class="bg-rently-purple-light/40 backdrop-blur-sm rounded-2xl overflow-hidden"
         >
@@ -43,10 +43,10 @@
 
       <!-- CTA -->
       <div class="mt-12 text-center">
-        <p class="text-white/80 mb-4">Still have questions?</p>
-        <button class="px-8 py-3 bg-rently-teal text-white font-semibold rounded-full hover:bg-rently-teal/90 transition-all">
-          Contact Support
-        </button>
+        <p class="text-white/80">
+          Still have questions?
+          <a href="mailto:sales@rently-uae.com" class="text-rently-teal hover:underline">Contact us</a>
+        </p>
       </div>
     </div>
   </section>
@@ -54,10 +54,22 @@
 
 <script setup lang="ts">
 import { FAQ_DATA } from '~/utils/seo/constants'
+import type { FAQItem } from '~/utils/uses/types'
+
+const props = withDefaults(
+  defineProps<{
+    faqs?: FAQItem[]
+    title?: string
+    subtitle?: string
+  }>(),
+  {
+    faqs: () => FAQ_DATA,
+    title: 'Frequently asked questions',
+    subtitle: 'Everything you need to know about Rently',
+  }
+)
 
 const openFaq = ref<number | null>(null)
-
-const faqs = FAQ_DATA
 
 const toggleFaq = (index: number) => {
   openFaq.value = openFaq.value === index ? null : index
