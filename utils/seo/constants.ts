@@ -3,7 +3,7 @@ export const SEO_DEFAULTS = {
   siteUrl: 'https://www.rently-uae.com',
   defaultTitle: 'Split Annual Rent into Monthly Payments | Rently UAE',
   defaultDescription: 'Rent now, pay later. Split your annual rent into manageable monthly payments with Rently. No large upfront deposits required. Available across UAE.',
-  defaultImage: 'https://www.rently-uae.com/og-image.jpg',
+  defaultImage: 'https://www.rently-uae.com/rently-meta.png',
   twitterHandle: '@rentlyuae',
   locale: 'en_AE',
 }
