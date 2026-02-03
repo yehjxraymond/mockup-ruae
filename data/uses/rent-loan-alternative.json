@@ -13,7 +13,6 @@
     "title": "The Smarter Rent Loan Alternative",
     "subtitle": "Skip the bank loan, avoid high interest rates, and still spread your annual rent into monthly payments. Rently is the modern alternative to traditional rent loans.",
     "ctaText": "Get Instant Quote",
-    "ctaLink": "#calculator",
     "heroImage": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=800&fit=crop"
   },
   "comparison": {
@@ -56,7 +55,6 @@
   ],
   "cta": {
     "title": "Skip the Bank Loan. Choose Rently.",
-    "buttonText": "Check Your Eligibility",
-    "buttonLink": "#calculator"
+    "buttonText": "Check Your Eligibility"
   }
 }

@@ -6,7 +6,7 @@
       </h2>
 
       <NuxtLink
-        :to="cta.buttonLink"
+        to="#calculator"
         class="inline-block px-10 py-4 bg-white text-rently-purple font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all text-lg"
       >
         {{ cta.buttonText || 'Get Instant Quote' }}

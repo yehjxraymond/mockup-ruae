@@ -14,16 +14,7 @@ export interface UseCaseHero {
   title: string
   subtitle: string
   ctaText: string
-  ctaLink: string
   heroImage?: string
-}
-
-export interface TrustBadge {
-  name: string
-}
-
-export interface TrustBadges {
-  logos: TrustBadge[]
 }
 
 export interface UseCaseComparison {
@@ -54,14 +45,12 @@ export interface FAQItem {
 export interface UseCaseCTA {
   title: string
   buttonText?: string
-  buttonLink: string
 }
 
 export interface UseCasePageData {
   meta: UseCaseMeta
   seo: UseCaseSEO
   hero: UseCaseHero
-  trustBadges?: TrustBadges
   comparison?: UseCaseComparison
   howItWorks?: UseCaseHowItWorks
   eligibility?: UseCaseEligibility

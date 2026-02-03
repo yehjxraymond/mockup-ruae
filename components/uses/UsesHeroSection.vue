@@ -13,7 +13,7 @@
           </p>
 
           <NuxtLink
-            :to="hero.ctaLink"
+            to="#calculator"
             class="block w-full sm:inline-block sm:w-auto px-8 py-4 bg-rently-teal text-white font-semibold rounded-full hover:bg-rently-teal/90 transition-all text-lg text-center"
           >
             {{ hero.ctaText }}

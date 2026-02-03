@@ -13,15 +13,7 @@
     "title": "Pay Your Rent with Credit Card",
     "subtitle": "Turn your monthly rent into credit card rewards. Pay rent using your credit card, earn points, and enjoy up to 55 days interest-free while managing your cash flow better.",
     "ctaText": "Get Instant Quote",
-    "ctaLink": "#calculator",
     "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop"
-  },
-  "trustBadges": {
-    "logos": [
-      { "name": "Visa" },
-      { "name": "Mastercard" },
-      { "name": "American Express" }
-    ]
   },
   "comparison": {
     "title": "Why choose Rently for splitting rental?"
@@ -63,7 +55,6 @@
   ],
   "cta": {
     "title": "Ready to Earn Rewards on Your Rent?",
-    "buttonText": "Apply Now",
-    "buttonLink": "#calculator"
+    "buttonText": "Apply Now"
   }
 }
