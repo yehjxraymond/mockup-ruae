@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 bg-rently-purple">
+  <section id="calculator" class="py-20 bg-rently-purple">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-gradient-to-br from-purple-500 via-purple-600 to-pink-400 rounded-3xl p-8 md:p-12">
         <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-12">

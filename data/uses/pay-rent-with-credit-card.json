@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "slug": "pay-rent-with-credit-card",
+    "title": "Pay Rent with Credit Card",
+    "keyword": "pay rent with credit card",
+    "category": "payment-flexibility"
+  },
+  "seo": {
+    "title": "Pay Rent with Credit Card in UAE",
+    "description": "Use your credit card to pay rent in Dubai and UAE. Earn rewards points, enjoy flexible payments, and manage cash flow better with Rently's rent payment solution."
+  },
+  "hero": {
+    "title": "Pay Your Rent with Credit Card",
+    "subtitle": "Turn your monthly rent into credit card rewards. Pay rent using your credit card, earn points, and enjoy up to 55 days interest-free while managing your cash flow better.",
+    "ctaText": "Get Instant Quote",
+    "ctaLink": "#calculator",
+    "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop"
+  },
+  "trustBadges": {
+    "logos": [
+      { "name": "Visa" },
+      { "name": "Mastercard" },
+      { "name": "American Express" }
+    ]
+  },
+  "comparison": {
+    "title": "Why choose Rently for splitting rental?"
+  },
+  "howItWorks": {
+    "title": "How Rently helps you split payments?",
+    "subtitle": "Get started in minutes with our simple 4-step process. No lengthy paperwork, no waiting weeks for approval."
+  },
+  "eligibility": {
+    "title": "Eligibility Requirements",
+    "subtitle": "Check if you qualify for Rently's flexible rent payment solution. Most UAE residents with stable income are eligible."
+  },
+  "features": {
+    "title": "Rently is expat friendly",
+    "subtitle": "Whether you're new to the UAE or just want more flexibility, Rently has you covered with features designed for modern renters.",
+    "featureIds": ["move-in-immediately", "new-to-uae", "security-deposit"]
+  },
+  "faqs": [
+    {
+      "question": "Can I pay my entire annual rent with a credit card?",
+      "answer": "Yes! Rently allows you to pay your full annual rent using your credit card. We split it into manageable monthly payments that charge to your card, so you earn rewards on the entire amount while maintaining cash flow flexibility."
+    },
+    {
+      "question": "Will my landlord know I'm paying with a credit card?",
+      "answer": "No, your landlord receives a standard bank transfer from Rently. They don't need to have a card terminal or accept card payments directly. The payment method is seamless and transparent for both parties."
+    },
+    {
+      "question": "What credit cards are accepted?",
+      "answer": "We accept all major credit cards including Visa, Mastercard, and American Express issued by UAE and international banks. Debit cards are also accepted but may not offer the same rewards benefits."
+    },
+    {
+      "question": "Are there any fees for paying rent with a credit card?",
+      "answer": "Rently charges a transparent service fee that is clearly disclosed before you commit. For most users, the credit card rewards earned exceed the service fee, making it a net positive financial decision."
+    },
+    {
+      "question": "How quickly is my landlord paid?",
+      "answer": "Once your payment is processed, we transfer funds to your landlord within 1 business day. Your landlord receives full payment on time, every time."
+    }
+  ],
+  "cta": {
+    "title": "Ready to Earn Rewards on Your Rent?",
+    "buttonText": "Apply Now",
+    "buttonLink": "#calculator"
+  }
+}
