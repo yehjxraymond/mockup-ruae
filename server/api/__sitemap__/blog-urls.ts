@@ -1,36 +1,15 @@
-// Blog posts data - scaffolded for CMS integration
-// Replace with CMS fetch when ready: const posts = await fetchPostsFromCMS()
-const blogPosts = [
-  {
-    slug: 'how-to-rent-without-deposit',
-    date: '2026-02-02',
-  },
-  {
-    slug: 'dubai-rental-market-2026',
-    date: '2026-01-28',
-  },
-  {
-    slug: 'first-time-renters-guide',
-    date: '2026-01-25',
-  },
-  {
-    slug: 'managing-monthly-rent-payments',
-    date: '2026-01-22',
-  },
-  {
-    slug: 'choosing-right-neighborhood',
-    date: '2026-01-18',
-  },
-  {
-    slug: 'rental-contract-tips',
-    date: '2026-01-15',
-  },
-]
+import { buildWispClient } from '@wisp-cms/client'
+
+const wisp = buildWispClient({
+  blogId: 'clvxv39ma00002zbc7j4heyj1',
+})
 
 export default defineSitemapEventHandler(async () => {
-  return blogPosts.map((post) => ({
+  const { posts } = await wisp.getPosts({ limit: 'all' })
+
+  return posts.map((post) => ({
     loc: `/blog/${post.slug}`,
-    lastmod: post.date,
+    lastmod: post.updatedAt ? new Date(post.updatedAt).toISOString().split('T')[0] : undefined,
     changefreq: 'monthly' as const,
     priority: 0.7,
   }))

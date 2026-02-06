@@ -47,6 +47,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: 'https://www.rently-uae.com',
+      wispBlogId: 'clvxv39ma00002zbc7j4heyj1',
     },
   },
 
