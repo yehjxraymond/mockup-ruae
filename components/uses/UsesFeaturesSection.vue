@@ -10,20 +10,18 @@
         </p>
       </div>
 
-      <!-- Feature Cards Carousel (Mobile) / Grid (Desktop) -->
+      <!-- Mobile: Single card carousel -->
       <div
-        ref="carouselRef"
-        class="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0"
-        @scroll="onScroll"
+        ref="mobileCarouselRef"
+        class="flex md:hidden gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4"
+        @scroll="onMobileScroll"
       >
         <div
-          v-for="feature in selectedFeatures"
+          v-for="feature in orderedFeatures"
           :key="feature.id"
-          class="bg-rently-purple-light/40 backdrop-blur-sm rounded-3xl p-6 flex flex-col flex-shrink-0 w-[85vw] md:w-auto snap-center"
+          class="bg-rently-purple-light/40 backdrop-blur-sm rounded-3xl p-6 flex flex-col flex-shrink-0 w-[85vw] snap-center"
         >
           <h3 class="text-xl font-bold text-white mb-4 text-center">{{ feature.title }}</h3>
-
-          <!-- Feature Visual with fixed 4:3 aspect ratio -->
           <div class="relative w-full rounded-2xl mb-4 overflow-hidden bg-rently-purple-light/60" style="aspect-ratio: 9/11;">
             <img
               v-if="feature.image"
@@ -38,21 +36,69 @@
               />
             </div>
           </div>
-
           <p class="text-white/80 text-sm leading-relaxed">{{ feature.description }}</p>
         </div>
       </div>
 
-      <!-- Carousel Dots (mobile only) -->
+      <!-- Mobile dots -->
       <div class="flex justify-center gap-2 mt-6 md:hidden">
         <button
-          v-for="(_, index) in selectedFeatures"
+          v-for="(_, index) in orderedFeatures"
           :key="index"
           :class="[
             'w-2 h-2 rounded-full transition-colors',
-            currentIndex === index ? 'bg-rently-teal' : 'bg-white/30'
+            mobileIndex === index ? 'bg-rently-teal' : 'bg-white/30'
           ]"
-          @click="scrollToIndex(index)"
+          @click="scrollToMobileIndex(index)"
+        />
+      </div>
+
+      <!-- Desktop/Tablet: 3 cards at a time with swipe -->
+      <div
+        ref="desktopCarouselRef"
+        class="hidden md:flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        @scroll="onDesktopScroll"
+      >
+        <div
+          v-for="(page, pageIndex) in featurePages"
+          :key="pageIndex"
+          class="grid grid-cols-3 gap-6 flex-shrink-0 w-full snap-center"
+        >
+          <div
+            v-for="feature in page"
+            :key="feature.id"
+            class="bg-rently-purple-light/40 backdrop-blur-sm rounded-3xl p-6 flex flex-col"
+          >
+            <h3 class="text-xl font-bold text-white mb-4 text-center">{{ feature.title }}</h3>
+            <div class="relative w-full rounded-2xl mb-4 overflow-hidden bg-rently-purple-light/60" style="aspect-ratio: 9/11;">
+              <img
+                v-if="feature.image"
+                :src="feature.image"
+                :alt="feature.title"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div v-else class="absolute inset-0 flex items-center justify-center">
+                <Icon
+                  :name="feature.icon || 'heroicons:sparkles'"
+                  class="w-16 h-16 text-white/30"
+                />
+              </div>
+            </div>
+            <p class="text-white/80 text-sm leading-relaxed">{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop/Tablet dots -->
+      <div v-if="featurePages.length > 1" class="hidden md:flex justify-center gap-2 mt-6">
+        <button
+          v-for="(_, index) in featurePages"
+          :key="index"
+          :class="[
+            'w-2 h-2 rounded-full transition-colors',
+            desktopIndex === index ? 'bg-rently-teal' : 'bg-white/30'
+          ]"
+          @click="scrollToDesktopIndex(index)"
         />
       </div>
     </div>
@@ -68,8 +114,10 @@ const props = defineProps<{
   featureIds: string[]
 }>()
 
-const carouselRef = ref<HTMLElement | null>(null)
-const currentIndex = ref(0)
+const mobileCarouselRef = ref<HTMLElement | null>(null)
+const desktopCarouselRef = ref<HTMLElement | null>(null)
+const mobileIndex = ref(0)
+const desktopIndex = ref(0)
 
 // Hardcoded feature definitions
 const allFeatures: Record<string, {
@@ -87,12 +135,6 @@ const allFeatures: Record<string, {
   },
   'new-to-uae': {
     id: 'new-to-uae',
-    title: 'New to the UAE?',
-    description: "We help expats who have not built a long credit history yet. Rently works with properties that come from any landlord, agent or rental platform.",
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=500&fit=crop',
-  },
-  'new-to-uae-calendar': {
-    id: 'new-to-uae-calendar',
     title: 'New to the UAE?',
     description: "We help expats who have not built a long credit history yet.",
     image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=400&h=500&fit=crop',
@@ -141,24 +183,58 @@ const allFeatures: Record<string, {
   },
 }
 
-const selectedFeatures = computed(() => {
-  return props.featureIds
+// Show all features: featureIds first, then remaining features
+const orderedFeatures = computed(() => {
+  const prioritized = props.featureIds
     .map(id => allFeatures[id])
     .filter(Boolean)
+
+  const prioritizedIds = new Set(props.featureIds)
+  const remaining = Object.values(allFeatures)
+    .filter(f => !prioritizedIds.has(f.id))
+
+  return [...prioritized, ...remaining]
 })
 
-const onScroll = () => {
-  if (!carouselRef.value) return
-  const scrollLeft = carouselRef.value.scrollLeft
-  const cardWidth = carouselRef.value.scrollWidth / selectedFeatures.value.length
-  currentIndex.value = Math.round(scrollLeft / cardWidth)
+// Group features into pages of 3 for desktop
+const featurePages = computed(() => {
+  const pages: typeof orderedFeatures.value[] = []
+  for (let i = 0; i < orderedFeatures.value.length; i += 3) {
+    pages.push(orderedFeatures.value.slice(i, i + 3))
+  }
+  return pages
+})
+
+// Mobile scroll handlers
+const onMobileScroll = () => {
+  if (!mobileCarouselRef.value) return
+  const scrollLeft = mobileCarouselRef.value.scrollLeft
+  const cardWidth = mobileCarouselRef.value.scrollWidth / orderedFeatures.value.length
+  mobileIndex.value = Math.round(scrollLeft / cardWidth)
 }
 
-const scrollToIndex = (index: number) => {
-  if (!carouselRef.value) return
-  const cardWidth = carouselRef.value.scrollWidth / selectedFeatures.value.length
-  carouselRef.value.scrollTo({
+const scrollToMobileIndex = (index: number) => {
+  if (!mobileCarouselRef.value) return
+  const cardWidth = mobileCarouselRef.value.scrollWidth / orderedFeatures.value.length
+  mobileCarouselRef.value.scrollTo({
     left: cardWidth * index,
+    behavior: 'smooth'
+  })
+}
+
+// Desktop scroll handlers
+const onDesktopScroll = () => {
+  if (!desktopCarouselRef.value) return
+  const scrollLeft = desktopCarouselRef.value.scrollLeft
+  const pageWidth = desktopCarouselRef.value.scrollWidth / featurePages.value.length
+  desktopIndex.value = Math.round(scrollLeft / pageWidth)
+}
+
+const scrollToDesktopIndex = (index: number) => {
+  if (!desktopCarouselRef.value) return
+  const pageWidth = desktopCarouselRef.value.scrollWidth / featurePages.value.length
+  desktopCarouselRef.value.scrollTo({
+    left: pageWidth * index,
     behavior: 'smooth'
   })
 }
